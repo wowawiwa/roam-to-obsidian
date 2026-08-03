@@ -1,0 +1,19 @@
+{
+  "name": "roam-migration",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.12.0",
+  "scripts": {
+    "roam-json-export-processing": "node src/on_json_roam_exports/main.ts",
+    "obsidian-directory-processing": "node src/on_obsidian_md_files/main.ts",
+    "replace-roam-linebreaks": "node src/on_json_roam_exports/replace-roam-linebreaks.ts",
+    "normalize-md-tabs": "node src/on_obsidian_md_files/normalize-leading-tabs.ts",
+    "replace-bullet-asterisks": "node src/on_obsidian_md_files/replace-bullet-asterisks.ts",
+    "expand-line-breaks": "node src/on_obsidian_md_files/expand-line-breaks.ts",
+    "fix-codeblock-endings": "node src/on_obsidian_md_files/fix-codeblock-endings.ts",
+    "fix-roam-tables": "node src/on_obsidian_md_files/fix-roam-tables.ts",
+    "fix-attachment-links": "node src/on_obsidian_md_files/fix-attachment-links.ts",
+    "add-roam-uid": "node src/on_obsidian_md_files/add-roam-uid.ts"
+  }
+}
