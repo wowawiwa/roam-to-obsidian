@@ -12,11 +12,13 @@
     "replace-bullet-asterisks": "node src/on_obsidian_md_files/replace-bullet-asterisks.ts",
     "expand-line-breaks": "node src/on_obsidian_md_files/expand-line-breaks.ts",
     "extract-inline-data": "node src/on_obsidian_md_files/extract-inline-data.ts",
+    "download-remote-attachments": "node src/on_obsidian_md_files/download-remote-attachments.ts",
     "fix-codeblock-endings": "node src/on_obsidian_md_files/fix-codeblock-endings.ts",
     "fix-roam-tables": "node src/on_obsidian_md_files/fix-roam-tables.ts",
     "fix-attachment-links": "node src/on_obsidian_md_files/fix-attachment-links.ts",
     "add-roam-uid": "node src/on_obsidian_md_files/add-roam-uid.ts",
     "list-attachments": "node src/list-attachments.ts",
-    "download-attachments": "node src/download-attachments.ts"
+    "download-attachments": "node src/download-attachments.ts",
+    "check-attachments-contained": "node src/check-attachments-contained.ts"
   }
 }

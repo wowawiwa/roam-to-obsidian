@@ -15,7 +15,7 @@ export interface RoamAttachment {
 // Markdown:
 //   ![photo.png](https://firebasestorage.googleapis.com/...)
 //   [report.pdf](https://firebasestorage.googleapis.com/...)
-const markdownLinkRegex = /!?\[([^\]]*)]\((https?:\/\/[^)\s]+)\)/g;
+export const markdownLinkRegex = /!?\[([^\]]*)]\((https?:\/\/[^)\s]+)\)/g;
 
 // Raw URLs, useful for constructs such as:
 //   {{pdf: https://firebasestorage.googleapis.com/...}}
@@ -37,7 +37,7 @@ function trimTrailingPunctuation(url: string): string {
 // "/<bucket>/<object>" for a direct GCS URL. Checking the shape (not just
 // a substring of the hostname) keeps prose mentions of the host itself
 // from being mistaken for attachments.
-function isRoamAttachmentUrl(url: string): boolean {
+export function isRoamAttachmentUrl(url: string): boolean {
   let parsed: URL;
 
   try {
@@ -92,6 +92,24 @@ function walk(value: unknown, attachments: Map<string, string | undefined>): voi
       walk(child, attachments);
     }
   }
+}
+
+// Names the file after the storage object's own path segment (e.g.
+// "kJ8x9vQdyj3.png" out of ".../o/imgs%2Fapp%2Fgraph%2FkJ8x9vQdyj3.png?..."),
+// not the link's display text — that segment is Firebase's own unique
+// key for the upload, so it appears verbatim in the JSON/markdown next to
+// the link and lets you grep for the exact filename on disk.
+export function deriveFilenameFromUrl(url: string): string {
+  let name: string | undefined;
+
+  try {
+    const decodedPath = decodeURIComponent(new URL(url).pathname);
+    name = decodedPath.split("/").filter(Boolean).pop();
+  } catch {
+    // fall back to the default name below
+  }
+
+  return (name || "attachment").replace(/[/\\?%*:|"<>]/g, "_");
 }
 
 export function findAttachmentUrls(data: unknown): RoamAttachment[] {

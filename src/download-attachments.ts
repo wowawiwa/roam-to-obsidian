@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { pipeline } from "node:stream/promises";
 import { createInterface } from "node:readline/promises";
 import { cliArgs } from "./cli-args.ts";
-import { findAttachmentUrls, type RoamAttachment } from "./attachment-urls.ts";
+import { deriveFilenameFromUrl, findAttachmentUrls, type RoamAttachment } from "./attachment-urls.ts";
 
 const CONCURRENCY = 5;
 const DOWNLOAD_TIMEOUT_MS = 60_000;
@@ -30,22 +30,8 @@ function timestamp(): string {
     .replace(/\..+$/, "");
 }
 
-// Name the file after the storage object's own path segment (e.g.
-// "kJ8x9vQdyj3.png" out of ".../o/imgs%2Fapp%2Fgraph%2FkJ8x9vQdyj3.png?..."),
-// not the link's display text — that segment is Firebase's own unique
-// key for the upload, so it appears verbatim in the JSON next to the
-// link and lets you grep the export for the exact filename on disk.
 function deriveFilename({ url }: RoamAttachment, used: Set<string>): string {
-  let name: string | undefined;
-
-  try {
-    const decodedPath = decodeURIComponent(new URL(url).pathname);
-    name = decodedPath.split("/").filter(Boolean).pop();
-  } catch {
-    // fall back to the default name below
-  }
-
-  name = (name || "attachment").replace(/[/\\?%*:|"<>]/g, "_");
+  const name = deriveFilenameFromUrl(url);
 
   let candidate = name;
   let counter = 1;

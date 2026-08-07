@@ -5,6 +5,7 @@ import { cp, mkdir, readdir, rm } from "fs/promises";
 import { basename, dirname, join } from "path";
 import { cliArgs } from "../cli-args.ts";
 import { addRoamUid } from "./add-roam-uid.ts";
+import { downloadRemoteAttachments } from "./download-remote-attachments.ts";
 import { expandLineBreaks } from "./expand-line-breaks.ts";
 import { extractInlineData } from "./extract-inline-data.ts";
 import { fixAttachmentLinks } from "./fix-attachment-links.ts";
@@ -71,17 +72,20 @@ Recursively processes all .md files, in order:
      [roam-export.json].
   2. extract-inline-data: turn inline base64 "data:" image links into
      attachment files created alongside the .md file.
-  3. normalize-leading-tabs: convert leading spaces to tabs, dedenting
+  3. download-remote-attachments: download links still pointing straight
+     at Roam's storage (not localized by the Obsidian importer) into
+     files created alongside the .md file, and embed them locally.
+  4. normalize-leading-tabs: convert leading spaces to tabs, dedenting
      the file if every line then shares a common tab prefix.
-  4. replace-bullet-asterisks: convert "*" list markers to "-".
-  5. expand-line-breaks: expand the line-break placeholder into indented
+  5. replace-bullet-asterisks: convert "*" list markers to "-".
+  6. expand-line-breaks: expand the line-break placeholder into indented
      lines.
-  6. fix-codeblock-endings: put codeblock closing fences on their own
+  7. fix-codeblock-endings: put codeblock closing fences on their own
      line.
-  7. fix-roam-tables: convert Roam {{table}} blocks to Obsidian tables.
-  8. fix-attachment-links: flatten links to the merged-in attachments.
-  9. fix-page-links: drop <directory>'s own name out of links, since
-     its content is moving up into its parent.
+  8. fix-roam-tables: convert Roam {{table}} blocks to Obsidian tables.
+  9. fix-attachment-links: flatten links to the merged-in attachments.
+  10. fix-page-links: drop <directory>'s own name out of links, since
+      its content is moving up into its parent.
 `;
 
 async function main() {
@@ -113,6 +117,15 @@ async function main() {
 
   await addRoamUid(jsonPath, finDir);
   await extractInlineData(finDir);
+
+  const remoteFailures = await downloadRemoteAttachments(finDir);
+  if (remoteFailures.length > 0) {
+    console.warn(`\n${remoteFailures.length} remote attachment(s) failed to download:`);
+    for (const { file, url, error } of remoteFailures) {
+      console.warn(`  ${file}: ${url} — ${error}`);
+    }
+  }
+
   await normalizeLeadingTabs(finDir);
   await replaceBulletAsterisks(finDir);
   await expandLineBreaks(finDir);
