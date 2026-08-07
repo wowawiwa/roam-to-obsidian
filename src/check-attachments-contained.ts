@@ -41,10 +41,20 @@ async function hashFile(path: string): Promise<string> {
   return hash.digest("hex");
 }
 
+// macOS's native filesystem (APFS/HFS+) stores filenames decomposed (NFD,
+// e.g. "e" + combining acute accent), while filenames arriving from a URL,
+// JSON, or most other tools are precomposed (NFC, e.g. "é" as one
+// codepoint) — so two paths for the same visible name can differ
+// byte-for-byte depending on which filesystem/tool produced them.
+// Normalizing before comparing keeps that from looking like a mismatch.
+function normalizedBasename(path: string): string {
+  return basename(path).normalize("NFC");
+}
+
 async function buildNameIndex(dir: string): Promise<Map<string, string[]>> {
   const index = new Map<string, string[]>();
   for (const path of await walkFiles(dir)) {
-    const name = basename(path);
+    const name = normalizedBasename(path);
     const paths = index.get(name);
     if (paths) paths.push(path);
     else index.set(name, [path]);
@@ -84,7 +94,7 @@ export async function checkAttachmentsContained(
   const mismatched: string[] = [];
 
   for (const sourcePath of sourceFiles) {
-    const candidates = targetIndex.get(basename(sourcePath));
+    const candidates = targetIndex.get(normalizedBasename(sourcePath));
     if (!candidates) {
       missing.push(sourcePath);
       continue;
