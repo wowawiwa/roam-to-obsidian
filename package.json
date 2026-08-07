@@ -11,6 +11,7 @@
     "normalize-md-tabs": "node src/on_obsidian_md_files/normalize-leading-tabs.ts",
     "replace-bullet-asterisks": "node src/on_obsidian_md_files/replace-bullet-asterisks.ts",
     "expand-line-breaks": "node src/on_obsidian_md_files/expand-line-breaks.ts",
+    "extract-inline-data": "node src/on_obsidian_md_files/extract-inline-data.ts",
     "fix-codeblock-endings": "node src/on_obsidian_md_files/fix-codeblock-endings.ts",
     "fix-roam-tables": "node src/on_obsidian_md_files/fix-roam-tables.ts",
     "fix-attachment-links": "node src/on_obsidian_md_files/fix-attachment-links.ts",

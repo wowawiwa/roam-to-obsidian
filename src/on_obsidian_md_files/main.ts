@@ -6,6 +6,7 @@ import { basename, dirname, join } from "path";
 import { cliArgs } from "../cli-args.ts";
 import { addRoamUid } from "./add-roam-uid.ts";
 import { expandLineBreaks } from "./expand-line-breaks.ts";
+import { extractInlineData } from "./extract-inline-data.ts";
 import { fixAttachmentLinks } from "./fix-attachment-links.ts";
 import { fixCodeblockEndings } from "./fix-codeblock-endings.ts";
 import { fixPageLinks } from "./fix-page-links.ts";
@@ -68,16 +69,18 @@ started, links pointing at "<directory's name>/..." are fixed too.
 Recursively processes all .md files, in order:
   1. add-roam-uid: tag each page's frontmatter with its Roam uid, using
      [roam-export.json].
-  2. normalize-leading-tabs: convert leading spaces to tabs, dedenting
+  2. extract-inline-data: turn inline base64 "data:" image links into
+     attachment files created alongside the .md file.
+  3. normalize-leading-tabs: convert leading spaces to tabs, dedenting
      the file if every line then shares a common tab prefix.
-  3. replace-bullet-asterisks: convert "*" list markers to "-".
-  4. expand-line-breaks: expand the line-break placeholder into indented
+  4. replace-bullet-asterisks: convert "*" list markers to "-".
+  5. expand-line-breaks: expand the line-break placeholder into indented
      lines.
-  5. fix-codeblock-endings: put codeblock closing fences on their own
+  6. fix-codeblock-endings: put codeblock closing fences on their own
      line.
-  6. fix-roam-tables: convert Roam {{table}} blocks to Obsidian tables.
-  7. fix-attachment-links: flatten links to the merged-in attachments.
-  8. fix-page-links: drop <directory>'s own name out of links, since
+  7. fix-roam-tables: convert Roam {{table}} blocks to Obsidian tables.
+  8. fix-attachment-links: flatten links to the merged-in attachments.
+  9. fix-page-links: drop <directory>'s own name out of links, since
      its content is moving up into its parent.
 `;
 
@@ -109,6 +112,7 @@ async function main() {
   await rm(cpDir, { recursive: true, force: true });
 
   await addRoamUid(jsonPath, finDir);
+  await extractInlineData(finDir);
   await normalizeLeadingTabs(finDir);
   await replaceBulletAsterisks(finDir);
   await expandLineBreaks(finDir);
