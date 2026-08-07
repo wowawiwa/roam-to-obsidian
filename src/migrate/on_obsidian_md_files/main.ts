@@ -3,7 +3,7 @@
 import { existsSync } from "fs";
 import { cp, mkdir, readdir, rm } from "fs/promises";
 import { basename, dirname, join } from "path";
-import { cliArgs } from "../cli-args.ts";
+import { cliArgs } from "../../common/cli-args.ts";
 import { addRoamUid } from "./add-roam-uid.ts";
 import { downloadRemoteAttachments } from "./download-remote-attachments.ts";
 import { expandLineBreaks } from "./expand-line-breaks.ts";

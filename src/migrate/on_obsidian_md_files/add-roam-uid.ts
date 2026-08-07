@@ -2,7 +2,7 @@
 
 import { readFile, writeFile } from "fs/promises";
 import { basename } from "path";
-import { cliArgs } from "../cli-args.ts";
+import { cliArgs } from "../../common/cli-args.ts";
 import { findMarkdownFiles, frontmatterLength } from "./md-files.ts";
 
 interface RoamPage {

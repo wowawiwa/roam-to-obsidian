@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import { createReadStream } from "node:fs";
 import { readdir, stat } from "node:fs/promises";
 import { basename, join } from "node:path";
-import { cliArgs } from "./cli-args.ts";
+import { cliArgs } from "../common/cli-args.ts";
 
 const HELP = `check-attachments-contained — verify every file in one directory
 already exists (same name, same content) somewhere in another directory

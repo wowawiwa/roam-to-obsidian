@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { readFile, writeFile } from "fs/promises";
-import { cliArgs } from "../cli-args.ts";
+import { cliArgs } from "../../common/cli-args.ts";
 import { findMarkdownFiles } from "./md-files.ts";
 
 function escapeRegExp(value: string): string {

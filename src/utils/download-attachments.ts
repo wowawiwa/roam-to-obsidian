@@ -5,8 +5,8 @@ import { createWriteStream } from "node:fs";
 import { join } from "node:path";
 import { pipeline } from "node:stream/promises";
 import { createInterface } from "node:readline/promises";
-import { cliArgs } from "./cli-args.ts";
-import { deriveFilenameFromUrl, findAttachmentUrls, type RoamAttachment } from "./attachment-urls.ts";
+import { cliArgs } from "../common/cli-args.ts";
+import { deriveFilenameFromUrl, findAttachmentUrls, type RoamAttachment } from "../common/attachment-urls.ts";
 
 const CONCURRENCY = 5;
 const DOWNLOAD_TIMEOUT_MS = 60_000;

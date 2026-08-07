@@ -1,24 +1,25 @@
 {
-  "name": "roam-migration",
+  "name": "roam-to-obsidian",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.12.0",
   "scripts": {
-    "roam-json-export-processing": "node src/on_json_roam_exports/main.ts",
-    "obsidian-directory-processing": "node src/on_obsidian_md_files/main.ts",
-    "replace-roam-linebreaks": "node src/on_json_roam_exports/replace-roam-linebreaks.ts",
-    "normalize-md-tabs": "node src/on_obsidian_md_files/normalize-leading-tabs.ts",
-    "replace-bullet-asterisks": "node src/on_obsidian_md_files/replace-bullet-asterisks.ts",
-    "expand-line-breaks": "node src/on_obsidian_md_files/expand-line-breaks.ts",
-    "extract-inline-data": "node src/on_obsidian_md_files/extract-inline-data.ts",
-    "download-remote-attachments": "node src/on_obsidian_md_files/download-remote-attachments.ts",
-    "fix-codeblock-endings": "node src/on_obsidian_md_files/fix-codeblock-endings.ts",
-    "fix-roam-tables": "node src/on_obsidian_md_files/fix-roam-tables.ts",
-    "fix-attachment-links": "node src/on_obsidian_md_files/fix-attachment-links.ts",
-    "add-roam-uid": "node src/on_obsidian_md_files/add-roam-uid.ts",
-    "list-attachments": "node src/list-attachments.ts",
-    "download-attachments": "node src/download-attachments.ts",
-    "check-attachments-contained": "node src/check-attachments-contained.ts"
+    "migrate:json": "node src/migrate/on_json_roam_exports/main.ts",
+    "migrate:md": "node src/migrate/on_obsidian_md_files/main.ts",
+
+    "utils:attach:download": "node src/utils/download-attachments.ts",
+    "utils:attach:compare-directories": "node src/utils/compare-attachment-directories.ts",
+
+    "json:replace-linebreaks": "node src/migrate/on_json_roam_exports/replace-roam-linebreaks.ts",
+    "md:add-roam-uid": "node src/migrate/on_obsidian_md_files/add-roam-uid.ts",
+    "md:extract-inline-data": "node src/migrate/on_obsidian_md_files/extract-inline-data.ts",
+    "md:download-remote-attachments": "node src/migrate/on_obsidian_md_files/download-remote-attachments.ts",
+    "md:normalize-tabs": "node src/migrate/on_obsidian_md_files/normalize-leading-tabs.ts",
+    "md:replace-bullet-asterisks": "node src/migrate/on_obsidian_md_files/replace-bullet-asterisks.ts",
+    "md:expand-line-breaks": "node src/migrate/on_obsidian_md_files/expand-line-breaks.ts",
+    "md:fix-codeblock-endings": "node src/migrate/on_obsidian_md_files/fix-codeblock-endings.ts",
+    "md:fix-roam-tables": "node src/migrate/on_obsidian_md_files/fix-roam-tables.ts",
+    "md:fix-attachment-links": "node src/migrate/on_obsidian_md_files/fix-attachment-links.ts"
   }
 }

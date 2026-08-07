@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { readFile, writeFile } from "fs/promises";
-import { cliArgs } from "../cli-args.ts";
-import { LINE_BREAK_PLACEHOLDER } from "../config.ts";
+import { cliArgs } from "../../common/cli-args.ts";
+import { LINE_BREAK_PLACEHOLDER } from "../../common/config.ts";
 import { findMarkdownFiles, frontmatterLength } from "./md-files.ts";
 
 const BULLET_LINE = /^(\t*)- (.*)$/;

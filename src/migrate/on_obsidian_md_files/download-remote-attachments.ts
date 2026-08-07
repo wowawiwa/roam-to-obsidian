@@ -4,8 +4,8 @@ import { existsSync, createWriteStream } from "fs";
 import { readFile, writeFile } from "fs/promises";
 import { pipeline } from "node:stream/promises";
 import { dirname, join } from "path";
-import { cliArgs } from "../cli-args.ts";
-import { deriveFilenameFromUrl, isRoamAttachmentUrl, markdownLinkRegex } from "../attachment-urls.ts";
+import { cliArgs } from "../../common/cli-args.ts";
+import { deriveFilenameFromUrl, isRoamAttachmentUrl, markdownLinkRegex } from "../../common/attachment-urls.ts";
 import { findMarkdownFiles } from "./md-files.ts";
 
 const DOWNLOAD_TIMEOUT_MS = 60_000;

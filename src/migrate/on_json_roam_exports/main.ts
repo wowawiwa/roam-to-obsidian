@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { cliArgs } from "../cli-args.ts";
+import { cliArgs } from "../../common/cli-args.ts";
 import { replaceRoamLinebreaks } from "./replace-roam-linebreaks.ts";
 
 const DEFAULT_INPUT_FILE = "migrations/export.json";

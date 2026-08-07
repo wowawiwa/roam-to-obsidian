@@ -4,7 +4,7 @@ import { existsSync } from "fs";
 import { readFile, writeFile } from "fs/promises";
 import { randomBytes } from "crypto";
 import { dirname, join } from "path";
-import { cliArgs } from "../cli-args.ts";
+import { cliArgs } from "../../common/cli-args.ts";
 import { findMarkdownFiles } from "./md-files.ts";
 
 // Roam inlines pasted images as base64 data URIs instead of attachment

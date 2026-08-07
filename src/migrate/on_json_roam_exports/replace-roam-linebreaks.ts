@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import { execFileSync } from "child_process";
 import { writeFileSync } from "fs";
-import { cliArgs } from "../cli-args.ts";
-import { LINE_BREAK_PLACEHOLDER } from "../config.ts";
+import { cliArgs } from "../../common/cli-args.ts";
+import { LINE_BREAK_PLACEHOLDER } from "../../common/config.ts";
 
 // A real line break inside a JSON string is encoded in the file as the
 // two source characters `\` `n` (an escape sequence), which the JSON

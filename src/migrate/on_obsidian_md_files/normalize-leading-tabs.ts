@@ -5,7 +5,7 @@
  */
 
 import { readFile, writeFile } from "fs/promises";
-import { cliArgs } from "../cli-args.ts";
+import { cliArgs } from "../../common/cli-args.ts";
 import { findMarkdownFiles, frontmatterLength } from "./md-files.ts";
 
 function convertLeadingSpacesToTabs(line: string): string {
