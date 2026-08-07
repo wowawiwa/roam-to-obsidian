@@ -15,6 +15,8 @@
     "fix-codeblock-endings": "node src/on_obsidian_md_files/fix-codeblock-endings.ts",
     "fix-roam-tables": "node src/on_obsidian_md_files/fix-roam-tables.ts",
     "fix-attachment-links": "node src/on_obsidian_md_files/fix-attachment-links.ts",
-    "add-roam-uid": "node src/on_obsidian_md_files/add-roam-uid.ts"
+    "add-roam-uid": "node src/on_obsidian_md_files/add-roam-uid.ts",
+    "list-attachments": "node src/list-attachments.ts",
+    "download-attachments": "node src/download-attachments.ts"
   }
 }
