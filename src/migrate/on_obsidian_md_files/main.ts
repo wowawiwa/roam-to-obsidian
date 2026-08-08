@@ -11,6 +11,7 @@ import { extractInlineData } from "./extract-inline-data.ts";
 import { fixAttachmentLinks } from "./fix-attachment-links.ts";
 import { fixCodeblockEndings } from "./fix-codeblock-endings.ts";
 import { fixPageLinks } from "./fix-page-links.ts";
+import { fixRoamMermaid } from "./fix-roam-mermaid.ts";
 import { fixRoamTables } from "./fix-roam-tables.ts";
 import { copyContents, moveContents, moveEntry } from "./move-contents.ts";
 import { normalizeLeadingTabs } from "./normalize-leading-tabs.ts";
@@ -83,8 +84,10 @@ Recursively processes all .md files, in order:
   7. fix-codeblock-endings: put codeblock closing fences on their own
      line.
   8. fix-roam-tables: convert Roam {{table}} blocks to Obsidian tables.
-  9. fix-attachment-links: flatten links to the merged-in attachments.
-  10. fix-page-links: drop <directory>'s own name out of links, since
+  9. fix-roam-mermaid: convert Roam {{mermaid}} blocks to Obsidian
+     mermaid codeblocks.
+  10. fix-attachment-links: flatten links to the merged-in attachments.
+  11. fix-page-links: drop <directory>'s own name out of links, since
       its content is moving up into its parent.
 `;
 
@@ -131,6 +134,7 @@ async function main() {
   await expandLineBreaks(finDir);
   await fixCodeblockEndings(finDir);
   await fixRoamTables(finDir);
+  await fixRoamMermaid(finDir);
   await fixAttachmentLinks(finDir);
   await fixPageLinks(finDir, basename(dir));
 

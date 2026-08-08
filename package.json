@@ -20,6 +20,7 @@
     "md:expand-line-breaks": "node src/migrate/on_obsidian_md_files/expand-line-breaks.ts",
     "md:fix-codeblock-endings": "node src/migrate/on_obsidian_md_files/fix-codeblock-endings.ts",
     "md:fix-roam-tables": "node src/migrate/on_obsidian_md_files/fix-roam-tables.ts",
+    "md:fix-roam-mermaid": "node src/migrate/on_obsidian_md_files/fix-roam-mermaid.ts",
     "md:fix-attachment-links": "node src/migrate/on_obsidian_md_files/fix-attachment-links.ts"
   }
 }
