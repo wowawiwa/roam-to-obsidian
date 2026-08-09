@@ -8,7 +8,8 @@
     "roam/css",
     "roam/templates",
     "roam/render",
-    "roam/depot"
+    "roam/depot",
+    "roam/comments",
   ]);
 
   const DEFAULT_TRANSFORMS = {

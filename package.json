@@ -8,8 +8,8 @@
     "migrate:json": "node src/migrate/on_json_roam_exports/main.ts",
     "migrate:md": "node src/migrate/on_obsidian_md_files/main.ts",
 
-    "utils:attach:download": "node src/utils/download-attachments.ts",
-    "utils:attach:compare-directories": "node src/utils/compare-attachment-directories.ts",
+    "backup:attach:download": "node src/backup/download-attachments.ts",
+    "backup:attach:compare-directories": "node src/backup/compare-attachment-directories.ts",
 
     "json:replace-linebreaks": "node src/migrate/on_json_roam_exports/replace-roam-linebreaks.ts",
     "md:add-roam-uid": "node src/migrate/on_obsidian_md_files/add-roam-uid.ts",

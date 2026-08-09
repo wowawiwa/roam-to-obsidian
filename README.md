@@ -67,6 +67,16 @@ Run `pnpm run migrate:md -- <directory>` on the **Obsidian directory** containin
 
 Zip files might not be properly imported by Obsidian. Make sure they work and replace them manually if not.
 
+## Roam exhaustive export tooling
+
+There are also tools to complete Roam's export.
+
+Roam exports is exhaustive, except for attachments: Those files you uploaded to Roam e.g. by drag-and-drop.
+
+You'll find tools to
+- download all those attachments.
+- download also the meta-data about them (original filename for instance)
+
 ## Obsidian setup
 
 Ask ChatGPT about plugins and config.
